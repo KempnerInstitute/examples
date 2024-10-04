@@ -22,7 +22,7 @@ pip3 install torch
 # 2. Run On HPC Cluster
 [scripts](scripts/) directory contains mlp scripts to run on single-GPU environment as well as different multi-GPU distributed approaches such as Distributed Data Parallelism (DDP), Model Parallelism (MP), Tensor Parallelism (TP) and Fully Sharded Data Parallelism (FSDP). It also contains slurm script skeletons that you can use to run the exmaples on the HPC cluster after creating the codna environment as described above.
 
-While in [scripts](scripts/) directory, follow below instructions on how run each script of multi-gpu scenarios:
+While in [scripts](scripts/) directory, follow below instructions on how run each script of different scenarios:
 ## 2.1
 It runs the mlp example on the (sigle-node) single-GPU setup using one A100 GPU.
 ```{code}bash
