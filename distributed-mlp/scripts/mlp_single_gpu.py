@@ -28,6 +28,13 @@ model = MLP(
   out_feature=layer_3_units
   ).to(device)
 
+# W1, b1, W2, b2 tensors
+# Total number of the model parameters is equal to: 38 ==> W1(6*4) + b1(1*4) + W2(4*2) + b1(1*2)
+for p in model.parameters():
+  print(p)
+total_params = sum(p.numel() for p in model.parameters())
+print(f"[GPU{device}] Total number of parameters in the model: {total_params}")
+
 loss_fn = nn.MSELoss()
 optimizer = optim.SGD(model.parameters(),lr=0.01)
 

@@ -71,6 +71,13 @@ model = parallelize_module(
     },
 )
 
+# W1, b1 split into two slices column-wise and W2, b2 split row-wise.
+# Total number of parameters in each GPU is equal to: 20 ==> W1(6*2) + b1(1*2) + W2(2*2) + b1(1*2)
+for p in model.parameters():
+  print(p.to_local())
+total_params = sum(p.to_local().numel() for p in model.parameters())
+print(f"[GPU{rank}] Total number of parameters in the model: {total_params}")
+
 loss_fn = nn.MSELoss()
 optimizer = optim.SGD(model.parameters(),lr=0.01)
 

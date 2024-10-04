@@ -58,6 +58,13 @@ model = MLP(
 
 model = DDP(model, device_ids=[device])
 
+# W1, b1, W2, b2 tensors are full copies (whole model replica) in each device for DDP
+# Total number of parameters in each replica is equal to: 38 ==> W1(6*4) + b1(1*4) + W2(4*2) + b1(1*2)
+for p in model.parameters():
+  print(p)
+total_params = sum(p.numel() for p in model.parameters())
+print(f"[GPU{rank}] Total number of parameters in the model: {total_params}")
+
 loss_fn = nn.MSELoss()
 optimizer = optim.SGD(model.parameters(),lr=0.01)
 

@@ -30,6 +30,16 @@ model = MLP(
   out_feature=layer_3_units
 )
 
+# W1, b1 tensors on GPU0 and W2, b2 on GPU1
+# Total number of the model parameters on GPU0 is equal to: 28 ==> W1(6*4) + b1(1*4)
+# Total number of the model parameters on GPU1 is equal to: 10 ==> W2(4*2) + b1(1*2)
+for p in model.parameters():
+  print(p)
+total_params_0 = sum(p.numel() for p in model.hidden_layer.parameters())
+print(f"[GPU0] Total number of parameters in the model: {total_params_0}")
+total_params_1 = sum(p.numel() for p in model.output_layer.parameters())
+print(f"[GPU1] Total number of parameters in the model: {total_params_1}")
+
 loss_fn = nn.MSELoss()
 optimizer = optim.SGD(model.parameters(),lr=0.01)
 
