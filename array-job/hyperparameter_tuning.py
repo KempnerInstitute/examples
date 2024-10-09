@@ -34,11 +34,12 @@ def main():
         print(f"Hyperparameters for task {args.task_id} written to {output_file}")
 
         # Sleep for 10 minutes
-        print("Sleeping for 5 minutes...")
-        time.sleep(300)
+        print("Sleeping for 2 minutes...")
+        time.sleep(120)
         print("Done!")
     else:
         print(f"No hyperparameters found for task {args.task_id}")
 
 if __name__ == "__main__":
     main()
+    
