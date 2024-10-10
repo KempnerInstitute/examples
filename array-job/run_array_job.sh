@@ -1,10 +1,10 @@
 #! /bin/bash
 #SBATCH --job-name=job-array
 #SBATCH --partition=kempner_requeue
-#SBATCH --account=kempner_dev
+#SBATCH --account=
 #SBATCH --nodes=1           
 #SBATCH --ntasks-per-node=1
-#SBATCH --gpus-per-node=1 
+#SBATCH --gpus-per-task=1 
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4GB
 #SBATCH --time=15:00

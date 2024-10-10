@@ -14,7 +14,7 @@ This repository contains a simple example of running hyperparameter tuning using
 ### Prerequisites
 
 - Access to a SLURM cluster
-- Python 3 installed on the cluster with any necessary modules for running the script
+- Python 3 installed on the cluster
 
 
 ### Steps to Clone and Run the Job
@@ -38,6 +38,12 @@ This will submit a SLURM array job with 12 tasks, where only two tasks run at th
 
 ```bash
 squeue -u <username>
+```
+
+or simply use
+
+```bash
+squeue -u $USER
 ```
 
 4. Once the job is complete, check the output files in the `output_<task_id>.txt` files:
