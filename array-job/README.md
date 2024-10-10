@@ -67,4 +67,33 @@ num_epochs: 10
 - **Multiple Ranges**: `#SBATCH --array=1-6,8-12` This will run tasks 1 to 6 and 8 to 12.
 - **Limit Number of Tasks Running at Once**: `#SBATCH --array=1-12%2` This will run only two tasks at a time.
 
+6. Requeue failed array jobs
+
+If a few jobs within the array job submission fail, we can requeue them using the following instructions.
+
+- Simulate failed jobs by uncommenting lines 29-30 in the `hyperparameter_tuning.py` script.
+
+```python
+    if args.task_id %3 == 0:
+       raise ValueError()
+```
+
+- Run the array job following Step 2, and wait for the jobs to finish. 
+
+- Requeue the failed jobs using the following bash command.
+
+```bash
+job_id=<ENTER JOB ID>
+for i in $(sacct -j $job_id | grep FAILED | grep -v batch | awk '{ print $1 }'); do scontrol requeue $i; done
+```
+
+or use
+
+```bash
+job_id=<ENTER JOB ID>
+for i in $(squeue -j $job_id --array --states=FAILED | awk 'NR > 1 { print $1 }'); do scontrol requeue $i; done
+```
+
+In the above commands, we first find the array job ID of the failed jobs and requeue them using `scontrol requeue <failed_array_job_id>`.
+
 Done!
