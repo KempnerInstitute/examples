@@ -25,6 +25,10 @@ def main():
     hyperparameters = read_hyperparameters(args.task_id,
                                            'hyperparameters.csv')
 
+    # Uncomment next two lines to test requeue for failed array jobs  
+    #if args.task_id %3 == 0:
+    #    raise ValueError()
+
     if hyperparameters is not None:
         # Write the hyperparameters to an output file
         output_file = f'output_{args.task_id}.txt'
