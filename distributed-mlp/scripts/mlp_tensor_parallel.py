@@ -38,7 +38,7 @@ assert (
 print(
   f"Hello from rank {rank} of {world_size} on {gethostname()} where there are" \
   f" {gpus_per_node} allocated GPUs per node." \
-  f" | (CUDA_VISIBLE_DEVICES={os.environ["CUDA_VISIBLE_DEVICES"]})", flush=True
+  f" | (CUDA_VISIBLE_DEVICES={os.environ['CUDA_VISIBLE_DEVICES']})", flush=True
 )
 
 # Using NCCl for inter-GPU communication
@@ -50,7 +50,7 @@ assert(rank == device_mesh.get_rank())
 device = rank - gpus_per_node * (rank // gpus_per_node)
 torch.cuda.set_device(device)
 
-print(f'Using GPU{device} on Machine {os.uname().nodename.split('.')[0]} (Rank {rank})')
+print(f"Using GPU{device} on Machine {os.uname().nodename.split('.')[0]} (Rank {rank})")
 
 # model construction
 layer_1_units = 6
